@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Station extends StatelessWidget {
   final String name;
-
   const Station({super.key, required this.name});
 
   @override
