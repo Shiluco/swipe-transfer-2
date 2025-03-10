@@ -11,7 +11,7 @@ class Station extends StatelessWidget {
     const double fontSize = 20; // 大きめのフォントサイズ
 
     return Padding(
-      padding: EdgeInsets.only(bottom:60,left: 15, right: 30), // 両脇に10の余白
+      padding: EdgeInsets.only(bottom:60,left: 25, right: 30), // 両脇に10の余白
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/Stations_widget.dart';
-import '../widgets/app_bar_widget.dart';
+import 'package:swipe_transfer_2/features/home/widgets/templates/stations_widget.dart';
+import 'package:swipe_transfer_2/features/home/widgets/templates/app_bar_widget.dart';
+
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
