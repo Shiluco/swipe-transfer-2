@@ -8,20 +8,24 @@ class StationEditorWidget extends StatelessWidget {
   final VoidCallback onRemove;
 
   const StationEditorWidget({
-    super.key,
     required this.index,
     required this.station,
     required this.onNameChanged,
     required this.onRemove,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: ValueKey(station.id),
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
+          ReorderableDelayedDragStartListener(
+            index: index,
+            child: const Icon(Icons.drag_indicator),
+          ),
+          const SizedBox(width: 8),
           Expanded(
             child: TextFormField(
               initialValue: station.name,
