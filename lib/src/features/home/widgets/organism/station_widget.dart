@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Station extends StatelessWidget {
+class StationWidget extends StatelessWidget {
+  final int id;
   final String name;
-  const Station({super.key, required this.name});
+  const StationWidget({super.key, required this.id, required this.name });
 
   @override
   Widget build(BuildContext context) {

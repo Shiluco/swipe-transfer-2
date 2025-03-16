@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:swipe_transfer_2/features/home/views/home_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // Riverpodのインポート
+import 'package:swipe_transfer_2/src/features/home/views/home_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
