@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swipe_transfer_2/src/providers/stations_provider.dart';
 import 'package:swipe_transfer_2/src/features/home/widgets/organism/station_editor_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class StationEditorView extends ConsumerWidget {
   const StationEditorView({super.key});
@@ -40,7 +41,13 @@ class StationEditorView extends ConsumerWidget {
     final stations = ref.watch(stationsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('駅編集')),
+      appBar: AppBar(
+        title: const Text('駅編集'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

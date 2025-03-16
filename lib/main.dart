@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Riverpodのインポート
-import 'package:swipe_transfer_2/src/features/home/views/home_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:swipe_transfer_2/src/common/router.dart';
 
 void main() {
   runApp(
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Swipe Transfer App',
-      home: const HomeView(),
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system, // システム設定に合わせて切り替え
