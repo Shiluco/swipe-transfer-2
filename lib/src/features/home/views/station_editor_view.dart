@@ -8,38 +8,10 @@ import 'package:go_router/go_router.dart';
 class StationEditorView extends ConsumerWidget {
   const StationEditorView({super.key});
 
-  void _addStation(WidgetRef ref) {
-    final stations = ref.read(stationsProvider);
-    final newId = stations.isNotEmpty ? stations.last.id + 1 : 1;
-    ref.read(stationsProvider.notifier).state = [
-      ...stations,
-      Station(id: newId, name: ''),
-    ];
-  }
-
-  void _removeStation(WidgetRef ref, int index) {
-    final stations = List<Station>.from(ref.read(stationsProvider));
-    stations.removeAt(index);
-    ref.read(stationsProvider.notifier).state = stations;
-  }
-
-  void _updateStationName(WidgetRef ref, int index, String name) {
-    final stations = List<Station>.from(ref.read(stationsProvider));
-    stations[index] = Station(id: stations[index].id, name: name);
-    ref.read(stationsProvider.notifier).state = stations;
-  }
-
-  void _handleReorder(WidgetRef ref, int oldIndex, int newIndex) {
-    final stations = List<Station>.from(ref.read(stationsProvider));
-    if (oldIndex < newIndex) newIndex -= 1;
-    final item = stations.removeAt(oldIndex);
-    stations.insert(newIndex, item);
-    ref.read(stationsProvider.notifier).state = stations;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stations = ref.watch(stationsProvider);
+    final stationNotifier = ref.read(stationsProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -54,18 +26,26 @@ class StationEditorView extends ConsumerWidget {
           Expanded(
             child: ReorderableListView.builder(
               itemCount: stations.length,
-              onReorder:
-                  (oldIndex, newIndex) =>
-                      _handleReorder(ref, oldIndex, newIndex),
+              onReorder: (oldIndex, newIndex) {
+                if (oldIndex < newIndex) newIndex -= 1;
+                final item = stations[oldIndex];
+                stationNotifier.removeStation(item.id); // 古い位置から削除
+                stationNotifier.addStation(item); // 新しい位置に追加
+              },
               itemBuilder: (context, index) {
                 final station = stations[index];
                 return StationEditorWidget(
-                  key: ValueKey(station.id), // StationEditorWidgetに直接keyを渡す
+                  key: ValueKey(station.id),
                   index: index,
                   station: station,
-                  onNameChanged:
-                      (value) => _updateStationName(ref, index, value),
-                  onRemove: () => _removeStation(ref, index),
+                  onNameChanged: (value) {
+                    stationNotifier.updateStation(
+                      Station(id: station.id, name: value),
+                    );
+                  },
+                  onRemove: () {
+                    stationNotifier.removeStation(station.id);
+                  },
                 );
               },
             ),
@@ -74,7 +54,10 @@ class StationEditorView extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () => _addStation(ref),
+                onPressed: () {
+                  final newId = stations.isNotEmpty ? stations.last.id + 1 : 1;
+                  stationNotifier.addStation(Station(id: newId, name: ''));
+                },
                 child: const Text('+'),
               ),
             ],
