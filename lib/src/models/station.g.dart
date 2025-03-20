@@ -21,11 +21,6 @@ const StationSchema = CollectionSchema(
       id: 0,
       name: r'name',
       type: IsarType.string,
-    ),
-    r'stationId': PropertySchema(
-      id: 1,
-      name: r'stationId',
-      type: IsarType.long,
     )
   },
   estimateSize: _stationEstimateSize,
@@ -59,7 +54,6 @@ void _stationSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.name);
-  writer.writeLong(offsets[1], object.stationId);
 }
 
 Station _stationDeserialize(
@@ -71,7 +65,6 @@ Station _stationDeserialize(
   final object = Station();
   object.id = id;
   object.name = reader.readString(offsets[0]);
-  object.stationId = reader.readLong(offsets[1]);
   return object;
 }
 
@@ -84,8 +77,6 @@ P _stationDeserializeProp<P>(
   switch (propertyId) {
     case 0:
       return (reader.readString(offset)) as P;
-    case 1:
-      return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -361,59 +352,6 @@ extension StationQueryFilter
       ));
     });
   }
-
-  QueryBuilder<Station, Station, QAfterFilterCondition> stationIdEqualTo(
-      int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'stationId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterFilterCondition> stationIdGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'stationId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterFilterCondition> stationIdLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'stationId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterFilterCondition> stationIdBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'stationId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
 }
 
 extension StationQueryObject
@@ -432,18 +370,6 @@ extension StationQuerySortBy on QueryBuilder<Station, Station, QSortBy> {
   QueryBuilder<Station, Station, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterSortBy> sortByStationId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'stationId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterSortBy> sortByStationIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'stationId', Sort.desc);
     });
   }
 }
@@ -473,18 +399,6 @@ extension StationQuerySortThenBy
       return query.addSortBy(r'name', Sort.desc);
     });
   }
-
-  QueryBuilder<Station, Station, QAfterSortBy> thenByStationId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'stationId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Station, Station, QAfterSortBy> thenByStationIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'stationId', Sort.desc);
-    });
-  }
 }
 
 extension StationQueryWhereDistinct
@@ -493,12 +407,6 @@ extension StationQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Station, Station, QDistinct> distinctByStationId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'stationId');
     });
   }
 }
@@ -514,12 +422,6 @@ extension StationQueryProperty
   QueryBuilder<Station, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
-    });
-  }
-
-  QueryBuilder<Station, int, QQueryOperations> stationIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'stationId');
     });
   }
 }
