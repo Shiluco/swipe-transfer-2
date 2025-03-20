@@ -6,4 +6,6 @@ part 'station.g.dart';
 class Station {
   Id id = Isar.autoIncrement;
   late String name;
+
+  Station({required this.id, required this.name});
 }

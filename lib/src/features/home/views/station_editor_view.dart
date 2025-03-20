@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swipe_transfer_2/src/providers/stations_provider.dart';
+import 'package:swipe_transfer_2/src/models/station.dart';
 import 'package:swipe_transfer_2/src/features/home/widgets/organism/station_editor_widget.dart';
 import 'package:go_router/go_router.dart';
 

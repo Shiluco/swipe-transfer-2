@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swipe_transfer_2/src/providers/stations_provider.dart';
+import 'package:swipe_transfer_2/src/models/station.dart';
 
 class StationEditorWidget extends StatelessWidget {
   final int index;

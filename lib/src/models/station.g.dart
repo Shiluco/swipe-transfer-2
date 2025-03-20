@@ -62,9 +62,10 @@ Station _stationDeserialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = Station();
-  object.id = id;
-  object.name = reader.readString(offsets[0]);
+  final object = Station(
+    id: id,
+    name: reader.readString(offsets[0]),
+  );
   return object;
 }
 
