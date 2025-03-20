@@ -22,8 +22,8 @@ class MyApp extends ConsumerWidget {
             routerConfig: router,
             title: 'Swipe Transfer App',
             theme: ThemeData.light(),
-            darkTheme: ThemeData.dark(),
-            themeMode: ThemeMode.system, // システム設定に合わせて切り替え
+            // darkTheme: ThemeData.dark(),
+            // themeMode: ThemeMode.system, // システム設定に合わせて切り替え
           ),
       loading: () => const CircularProgressIndicator(), // Isar 初期化中
       error:

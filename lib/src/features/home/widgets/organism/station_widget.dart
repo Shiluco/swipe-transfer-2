@@ -22,19 +22,23 @@ class StationWidget extends StatelessWidget {
             String start = Uri.encodeComponent(details.data['name']); // 出発駅
             String goal = Uri.encodeComponent(name); // 目的駅
 
+            // 出発駅と目的駅が同じなら処理を中断
+            if (start == goal) {
+              print("出発駅と目的駅が同じため処理を中断しました");
+              return;
+            }
+
             String url =
                 "https://transit.yahoo.co.jp/search/result?flatlon=&fromgid=&from=$start&to=$goal&viacode=&via=&viacode=&via=&viacode=&via=&type=1&ticket=ic&expkind=1&ws=3&s=0&al=1&shin=1&ex=1&hb=1&lb=1&sr=1";
 
             // ブラウザで開く
             if (await canLaunchUrl(Uri.parse(url))) {
-              await launchUrl(
-                Uri.parse(url),
-                mode: LaunchMode.inAppWebView,
-              );
+              await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
             } else {
               print("URLを開けませんでした");
             }
           },
+
           builder: (context, candidateData, rejectedData) {
             bool isHovered = candidateData.isNotEmpty; // ドロップ対象の上にいるか
 
