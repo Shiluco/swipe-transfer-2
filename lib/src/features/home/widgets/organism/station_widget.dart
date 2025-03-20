@@ -25,9 +25,6 @@ class StationWidget extends StatelessWidget {
             String url =
                 "https://transit.yahoo.co.jp/search/result?flatlon=&fromgid=&from=$start&to=$goal&viacode=&via=&viacode=&via=&viacode=&via=&type=1&ticket=ic&expkind=1&ws=3&s=0&al=1&shin=1&ex=1&hb=1&lb=1&sr=1";
 
-            print('🚀 ドラッグ: $start → ドロップ: $goal');
-            print('🔗 開くURL: $url');
-
             // ブラウザで開く
             if (await canLaunchUrl(Uri.parse(url))) {
               await launchUrl(
@@ -35,7 +32,7 @@ class StationWidget extends StatelessWidget {
                 mode: LaunchMode.inAppWebView,
               );
             } else {
-              print("🚨 URLを開けませんでした");
+              print("URLを開けませんでした");
             }
           },
           builder: (context, candidateData, rejectedData) {
