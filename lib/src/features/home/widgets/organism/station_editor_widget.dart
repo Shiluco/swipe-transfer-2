@@ -21,10 +21,11 @@ class StationEditorWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          ReorderableDelayedDragStartListener(
-            index: index,
-            child: const Icon(Icons.drag_indicator),
-          ),
+          //todo:並び替え機能の復活
+          // ReorderableDelayedDragStartListener(
+          //   index: index,
+          //   child: const Icon(Icons.drag_indicator),
+          // ),
           const SizedBox(width: 8),
           Expanded(
             child: TextFormField(
