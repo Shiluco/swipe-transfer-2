@@ -7,5 +7,5 @@ class Station {
   Id id = Isar.autoIncrement;
   late String name;
 
-  Station({required this.id, required this.name});
+  Station({this.id = Isar.autoIncrement, required this.name});
 }
